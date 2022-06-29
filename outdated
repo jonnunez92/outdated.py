@@ -1,0 +1,53 @@
+month = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+]
+
+def main():
+    get_date("Date: ")
+
+def get_date(prompt):
+    while True:
+        try:
+            date = input(prompt)
+            if "/" in date:
+                date_list = []
+                date_sep = date.split("/")
+                len_holder = []
+                date_list.extend(date_sep)
+
+                for i in date_list:
+                    len_holder.extend(str(len(i)))
+
+                if len_holder[2] == "4":
+                    print(date_list[2] + "-" + f"{int(date_list[0]):02}" + "-" + f"{int(date_list[1]):02}")
+                    break
+            else:
+                month_holder = []
+                date_month = date.split(" ", 1)
+                month_holder.append(date_month[0].title())
+                month_holder.extend(date_month[1].split(","))
+                month_holder[2] = month_holder[2].strip()
+                len_holder = []
+                month_date = (month.index(month_holder[0])) + 1
+
+                for i in month_holder:
+                    len_holder.extend(str(len(i)))
+
+                if month_holder[0] in month and len_holder[2] == "4":
+                    print(month_holder[2] + "-" + f"{month_date:02}" + "-" + f"{int(month_holder[1]):02}")
+                    break
+        except (ValueError, NameError, KeyError, IndexError):
+            pass
+
+main()
